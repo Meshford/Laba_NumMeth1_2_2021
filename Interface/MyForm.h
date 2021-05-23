@@ -202,7 +202,8 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox2_SelectedIndexChanged);
 			// 
 			// button1
-			// 
+			//
+			/*
 			this->button1->Location = System::Drawing::Point(32, 796);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(107, 26);
@@ -210,9 +211,11 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->button1->Text = L"ѕоказать";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			*/
 			// 
 			// button4
 			// 
+			/*
 			this->button4->Location = System::Drawing::Point(205, 795);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(100, 26);
@@ -220,6 +223,7 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->button4->Text = L"ѕоказать";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
+			*/
 			// 
 			// label11
 			// 
@@ -236,8 +240,7 @@ private: System::Windows::Forms::Panel^ panel1;
 			// 
 			this->tabPage1->AllowDrop = true;
 			this->tabPage1->AutoScroll = true;
-			this->tabPage1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(255)),
-				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->tabPage1->BackColor = System::Drawing::Color::PowderBlue;
 			this->tabPage1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->tabPage1->Controls->Add(this->button1);
 			this->tabPage1->Controls->Add(this->button4);
@@ -584,6 +587,7 @@ private: System::Windows::Forms::Panel^ panel1;
 
 		}
 #pragma endregion
+		//кнопка дл€ тестовой задачи
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		int n, m;
@@ -596,7 +600,7 @@ private: System::Windows::Forms::Panel^ panel1;
 		xBorder[1] = 1;
 		yBorder[0] = -1;
 		yBorder[1] = 1;
-
+		
 		String ^methodname, ^interpolname = "использовано нулевое приближение";
 
 		AllMethods *subject;
@@ -673,12 +677,25 @@ private: System::Windows::Forms::Panel^ panel1;
 		s += "ƒостигнута€ точность метода: " + Convert::ToString(res[0]) + "\n\n";
 		s += "“естова€ задача решена с точностью: " + Convert::ToString(res[2]) + "\n\n";
 		s += "¬ качестве начального приближени€ " + interpolname + "\n\n";
+		s += "≈вклидова норма нев€зки на вспомогательной сетке: " + Convert::ToString(res[3]) + "\n\n";
+		s += "начальна€ евклидова норма нев€зки на вспомогательной сетке: " + Convert::ToString(res[10]) + "\n\n";
 
 		MessageBox::Show(s, "–езультаты решени€ тестовой задачи", MessageBoxButtons::OK);
 		
 	}
+    //конец тестовой задачи
 
 
+
+
+
+
+
+
+
+
+
+	//кнопка решени€ основной задачи
 	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		int n, m;
@@ -779,13 +796,16 @@ private: System::Windows::Forms::Panel^ panel1;
 		s += "ћаксимальна€ разность двух приближений составила: " + Convert::ToString(res[4]) + "\n\n";
 		s += "» соответствует узлу x = " + Convert::ToString(res[7]) + " y = " + Convert::ToString(res[8]) + "\n\n";
 		s += "¬ качестве начального приближени€ " + interpolname + "\n\n";
+		s += "≈вклидова норма нев€зки на основной сетке: " + Convert::ToString(res[5]) + "\n\n";
+		//s += "Ќорма бесконечности нев€зки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
+		s += "начальна€ евклидова норма нев€зки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
 		
 		MessageBox::Show(s, "–езультаты решени€ основной задачи", MessageBoxButtons::OK);
 
 	}
 
 
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	/*private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		//“естова€
 		String ^methodname, ^interpolname = "использовано нулевое приближение";
@@ -810,8 +830,8 @@ private: System::Windows::Forms::Panel^ panel1;
 			interpolname = "использовано усреднение интерпол€ций по x и по y";
 
 		ifstream file("ResTest.txt");
-		TVector<double> res(9);
-		for (int i = 0; i < 9; i++)
+		TVector<double> res(10);
+		for (int i = 0; i < 10; i++)
 			file >> res[i];
 		file.close();
 
@@ -825,13 +845,17 @@ private: System::Windows::Forms::Panel^ panel1;
 		s += "ƒостигнута€ точность метода: " + Convert::ToString(res[0]) + "\n\n";
 		s += "“естова€ задача решена с точностью: " + Convert::ToString(res[2]) + "\n\n";
 		s += "¬ качестве начального приближени€ " + interpolname + "\n\n";
+		s += "≈вклидова норма нев€зки на вспомогательной сетке: " + Convert::ToString(res[3]) + "\n\n";
+		//s += "Ќорма бесконечности нев€зки на вспомогательной сетке: " + Convert::ToString(res[10]) + "\n\n";
+		s += "начальна€ евклидова норма нев€зки на вспомогательной сетке: " + Convert::ToString(res[10]) + "\n\n";
+
 
 		MessageBox::Show(s, "–езультаты решени€ тестовой задачи", MessageBoxButtons::OK);
 		
-	}
+	}*/
 
 
-	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+	/*private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		//ќсновна€
 		String ^methodname, ^interpolname = "использовано нулевое приближение";
@@ -874,9 +898,12 @@ private: System::Windows::Forms::Panel^ panel1;
 		s += "ћаксимальна€ разность двух приближений составила: " + Convert::ToString(res[4]) + "\n\n";
 		s += "» соответствует узлу x = " + Convert::ToString(res[7]) + " y = " + Convert::ToString(res[8]) + "\n\n";
 		s += "¬ качестве начального приближени€ " + interpolname + "\n\n";
+		s += "≈вклидова норма нев€зки на основной сетке: " + Convert::ToString(res[5]) + "\n\n";
+		//s += "Ќорма бесконечности нев€зки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
+		s += "начальна€ евклидова норма нев€зки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
 
 		MessageBox::Show(s, "–езультаты решени€ основной задачи", MessageBoxButtons::OK);
-	}
+	}*/
 
 
 	private: void OutToDataGrid1(string s)

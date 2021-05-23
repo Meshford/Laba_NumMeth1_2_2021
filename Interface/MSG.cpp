@@ -74,6 +74,11 @@ TVector<double> MSG::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 		break;
 	}
 
+	double temp1;
+	VectorNevyazki();
+	Solution.VectorNevyazki();
+	temp1 = Solution.NevyazkaEvkl();
+
 	double sup; //Вспомогательная переменная
 	TVector<double> accurancy(2); //Точность метода
 	//Чтобы зайти в цикл
@@ -129,7 +134,7 @@ TVector<double> MSG::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 
 	sup = NevyazkaEvkl();
 	temp = Solution.NevyazkaEvkl();
-	TVector<double> result(9);
+	TVector<double> result(10);
 	result[0] = accurancy[0]; //Точность метода на сетке (n+1,m+1)
 	result[1] = IterationsCount[0]; //Количество итераций на сетке (n+1,m+1)
 	result[2] = accurancy[1]; //Точность метода на сетке (2n+1,2m+1)
@@ -139,13 +144,16 @@ TVector<double> MSG::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 	result[6] = temp; //Евклидова норма невязки на вспомогательной сетке
 	result[7] = xBorder[0] + ix * h; //Значение x в самой плохой точке
 	result[8] = yBorder[0] + jy * k; //Значение y в самой плохой точке
-
+	result[9] = temp1; // начальная евклидова норма невязки на основной сетке
 	return result;
 }
 
 
 TVector<double> MSG::MethodError(double eps, int MaxIterations)
 {
+
+	VectorNevyazki();
+	double sup1 = NevyazkaEvkl();
 	//Считаем точное решение
 	TMatrix<double> u(m + 1);
 	double x, y = yBorder[0];
@@ -197,13 +205,14 @@ TVector<double> MSG::MethodError(double eps, int MaxIterations)
 
 	VectorNevyazki();
 	sup = NevyazkaEvkl();
-	TVector<double> result(6);
+	TVector<double> result(11);
 	result[0] = accurancy; //Точность метода
 	result[1] = IterationsCount; //Количество итераций
 	result[2] = error; //Погрешность решения
 	result[3] = sup; //Евклидова норма невязки
 	result[4] = xBorder[0] + h * ix; //Значение x в самой плохой точке
 	result[5] = yBorder[0] + k * jy; //Значение y в самой плохой точке
+	result[10] = sup1;//начальная евклидова норма невязки на вспомогательно сетке
 
 	return result;
 }

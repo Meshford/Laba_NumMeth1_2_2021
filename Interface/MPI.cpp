@@ -71,6 +71,9 @@ TVector<double> MPI::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 		Solution.Optimal(false);
 		Solution.SetUserParametr(Tau);
 	}
+	VectorNevyazki();
+	Solution.VectorNevyazki();
+	double temp1 = Solution.NevyazkaEvkl();
 
 	TVector<double> accurancy(2); //“очность метода
 	//„тобы зайти в цикл
@@ -96,7 +99,7 @@ TVector<double> MPI::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 	ofstream Difference("DifferenceA.txt", ios::app); //«апись в файл будет продолжена с последнего элемента
 
 	double error = 0; //“очность решени€
-	double sup; //¬спомогательна€ переменна€
+	double sup=0;//¬спомогательна€ переменна€
 	int ix, jy;
 	for (int j = 0; j <= m; j++)
 		for (int i = 0; i <= n; i++)
@@ -111,12 +114,12 @@ TVector<double> MPI::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 			}
 		}
 
-	double temp;
+	double temp=0;
 	VectorNevyazki();
 	Solution.VectorNevyazki();
 	temp = Solution.NevyazkaEvkl();
 	sup = NevyazkaEvkl();
-	TVector<double> result(9);
+	TVector<double> result(10);
 	result[0] = accurancy[0]; //“очность метода на сетке (n+1,m+1)
 	result[1] = IterationsCount[0]; // оличество итераций на сетке (n+1,m+1)
 	result[2] = accurancy[1]; //“очность метода на сетке (2n+1,2m+1)
@@ -126,6 +129,9 @@ TVector<double> MPI::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 	result[6] = temp; //≈вклидова норма нев€зки на вспомогательной сетке
 	result[7] = xBorder[0] + ix * h; //«начение x в самой плохой точке
 	result[8] = yBorder[0] + jy * k; //«начение y в самой плохой точке
+	//result[9] = sup1; //норма бесконечности нев€зки на основной сетке
+	//result[10] = temp1; //норма бесконечности нев€зки на вспомогательной сетке
+	result[9] = temp1; //начальна€ евклидова норма нев€зки на основной сетке
 
 	return result;
 }

@@ -23,3 +23,8 @@ C:\Users\Никита\Desktop\моя лаба чм\Interface\Release\Interface.M
 C:\Users\Никита\Desktop\моя лаба чм\Interface\Release\Interface.MyForm.resources
 C:\Users\Никита\Desktop\моя лаба чм\Interface\Release\Interface.vcxproj.GenerateResource.cache
 C:\Users\Никита\Desktop\моя лаба чм\Interface\Release\Interface.exe
+C:\Users\Никита\Desktop\Лаба 1 ЧМ 2021\Interface\Release\Interface.vcxprojAssemblyReference.cache
+C:\Users\Никита\Desktop\Лаба 1 ЧМ 2021\Interface\Release\Interface.MessageBOX.resources
+C:\Users\Никита\Desktop\Лаба 1 ЧМ 2021\Interface\Release\Interface.MyForm.resources
+C:\Users\Никита\Desktop\Лаба 1 ЧМ 2021\Interface\Release\Interface.vcxproj.GenerateResource.cache
+C:\Users\Никита\Desktop\Лаба 1 ЧМ 2021\Interface\Release\Interface.exe
