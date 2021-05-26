@@ -58,8 +58,8 @@ namespace Interface {
 
 	private: System::Windows::Forms::ComboBox^ comboBox3;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button4;
+
+
 	private: System::Windows::Forms::Label^ label11;
 
 
@@ -97,6 +97,9 @@ private: System::Windows::Forms::Panel^ panel2;
 private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Label^ label8;
 
 
 
@@ -118,8 +121,6 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
@@ -148,6 +149,9 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->tabPage1->SuspendLayout();
@@ -185,7 +189,7 @@ private: System::Windows::Forms::Panel^ panel1;
 			// 
 			this->comboBox3->FormattingEnabled = true;
 			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"v(x,y)", L"v2(x,y)", L"|v(x,y)-v2(x,y)|" });
-			this->comboBox3->Location = System::Drawing::Point(10, 88);
+			this->comboBox3->Location = System::Drawing::Point(10, 85);
 			this->comboBox3->Name = L"comboBox3";
 			this->comboBox3->Size = System::Drawing::Size(136, 30);
 			this->comboBox3->TabIndex = 18;
@@ -201,40 +205,16 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->comboBox2->TabIndex = 17;
 			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox2_SelectedIndexChanged);
 			// 
-			// button1
-			//
-			/*
-			this->button1->Location = System::Drawing::Point(32, 796);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(107, 26);
-			this->button1->TabIndex = 16;
-			this->button1->Text = L"Показать";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
-			*/
-			// 
-			// button4
-			// 
-			/*
-			this->button4->Location = System::Drawing::Point(205, 795);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(100, 26);
-			this->button4->TabIndex = 15;
-			this->button4->Text = L"Показать";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
-			*/
-			// 
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label11->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label11->Location = System::Drawing::Point(85, 770);
+			this->label11->Location = System::Drawing::Point(10, 121);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(169, 23);
+			this->label11->Size = System::Drawing::Size(106, 19);
 			this->label11->TabIndex = 13;
-			this->label11->Text = L"Данные расчётов";
+			this->label11->Text = L"Доп. данные";
 			// 
 			// tabPage1
 			// 
@@ -242,9 +222,6 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->tabPage1->AutoScroll = true;
 			this->tabPage1->BackColor = System::Drawing::Color::PowderBlue;
 			this->tabPage1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->tabPage1->Controls->Add(this->button1);
-			this->tabPage1->Controls->Add(this->button4);
-			this->tabPage1->Controls->Add(this->label11);
 			this->tabPage1->Controls->Add(this->panel2);
 			this->tabPage1->Controls->Add(this->panel1);
 			this->tabPage1->Controls->Add(this->button5);
@@ -272,13 +249,15 @@ private: System::Windows::Forms::Panel^ panel1;
 			// panel2
 			// 
 			this->panel2->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->panel2->Controls->Add(this->button1);
+			this->panel2->Controls->Add(this->label11);
 			this->panel2->Controls->Add(this->label1);
 			this->panel2->Controls->Add(this->comboBox2);
 			this->panel2->Controls->Add(this->label12);
 			this->panel2->Controls->Add(this->button2);
 			this->panel2->Location = System::Drawing::Point(0, 614);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(155, 131);
+			this->panel2->Size = System::Drawing::Size(155, 168);
 			this->panel2->TabIndex = 26;
 			// 
 			// label1
@@ -318,13 +297,15 @@ private: System::Windows::Forms::Panel^ panel1;
 			// panel1
 			// 
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->panel1->Controls->Add(this->button4);
+			this->panel1->Controls->Add(this->label8);
 			this->panel1->Controls->Add(this->comboBox3);
 			this->panel1->Controls->Add(this->label7);
 			this->panel1->Controls->Add(this->label13);
 			this->panel1->Controls->Add(this->button3);
 			this->panel1->Location = System::Drawing::Point(161, 614);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(166, 131);
+			this->panel1->Size = System::Drawing::Size(166, 168);
 			this->panel1->TabIndex = 25;
 			// 
 			// label7
@@ -557,11 +538,40 @@ private: System::Windows::Forms::Panel^ panel1;
 			this->tabControl1->Size = System::Drawing::Size(352, 648);
 			this->tabControl1->TabIndex = 0;
 			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label8->Location = System::Drawing::Point(20, 118);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(106, 19);
+			this->label8->TabIndex = 29;
+			this->label8->Text = L"Доп. данные";
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(14, 143);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(123, 23);
+			this->button1->TabIndex = 30;
+			this->button1->Text = L"Показать";
+			this->button1->UseVisualStyleBackColor = true;
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(12, 143);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(123, 26);
+			this->button4->TabIndex = 30;
+			this->button4->Text = L"Показать";
+			this->button4->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
 			this->BackColor = System::Drawing::Color::LightCyan;
-			this->ClientSize = System::Drawing::Size(1034, 577);
+			this->ClientSize = System::Drawing::Size(1034, 657);
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->tabControl1);
@@ -647,8 +657,10 @@ private: System::Windows::Forms::Panel^ panel1;
 			interpolname = "использовано усреднение интерполяций по x и по y";
 		}
 
+
 		//Решаем задачу
-		TVector<double> res = subject->MethodError(eps, MaxIterations);
+		subject->MethodError(eps, MaxIterations);
+		TVector<double> res = subject->GetTestResults();
 
 		//Заполняем файл результатами работы программы
 		ofstream file("ResTest.txt");
@@ -667,21 +679,8 @@ private: System::Windows::Forms::Panel^ panel1;
 		file << temp << endl;
 		file.close();
 
-		String ^s;
-		s = "Для решения тестовой задачи использована сетка с числом\n\n";
-		s += "Разбиений по x: n = " + textBox1->Text + " и числом разбиений по y: m = " + textBox2->Text + "\n\n";
-		s += "Применялся " + methodname + "\n\n";
-		s += "Точность метода: eps = " + textBox3->Text + "\n\n";
-		//s+="Параметр метода: ";
-		s += "На решение затрачено N = " + Convert::ToString(res[1]) + "\n\n";
-		s += "Достигнутая точность метода: " + Convert::ToString(res[0]) + "\n\n";
-		s += "Тестовая задача решена с точностью: " + Convert::ToString(res[2]) + "\n\n";
-		s += "В качестве начального приближения " + interpolname + "\n\n";
-		s += "Евклидова норма невязки на вспомогательной сетке: " + Convert::ToString(res[3]) + "\n\n";
-		s += "начальная евклидова норма невязки на вспомогательной сетке: " + Convert::ToString(res[10]) + "\n\n";
+		TestResData();
 
-		MessageBox::Show(s, "Результаты решения тестовой задачи", MessageBoxButtons::OK);
-		
 	}
     //конец тестовой задачи
 
@@ -764,7 +763,8 @@ private: System::Windows::Forms::Panel^ panel1;
 		}
 
 		//Решаем задачу
-		TVector<double> res = subject->MethodAccuracy(eps, MaxIterations, Name);
+		subject->MethodAccuracy(eps, MaxIterations, Name);
+		TVector<double> res = subject->GetMainResults();
 
 		//Заполняем файл результатами работы программы
 		ofstream file("ResMain.txt");
@@ -783,127 +783,11 @@ private: System::Windows::Forms::Panel^ panel1;
 		file << temp << endl;
 		file.close();
 
-		String ^s;
-		s = "Для основной задачи использована сетка с числом\n\n";
-		s += "Разбиений по x: n = " + textBox1->Text + " и числом разбиений по y: m = " + textBox2->Text + "\n\n";
-		s += "Применялся " + methodname + "\n\n";
-		s += "Точность метода: eps = " + textBox3->Text + "\n\n";
-		//s+="Параметр метода: ";
-		s += "На решение затрачено N = " + Convert::ToString(res[1]) + "\n\n";
-		s += "Достигнутая точность метода: " + Convert::ToString(res[0]) + "\n\n";
-		s += "При пересчёте задачи с половинным шагом затрачено N = " + Convert::ToString(res[3]) + " итераций \n\n";
-		s += "и достигнута точность итерационного метода: " + Convert::ToString(res[2]) + "\n\n";
-		s += "Максимальная разность двух приближений составила: " + Convert::ToString(res[4]) + "\n\n";
-		s += "И соответствует узлу x = " + Convert::ToString(res[7]) + " y = " + Convert::ToString(res[8]) + "\n\n";
-		s += "В качестве начального приближения " + interpolname + "\n\n";
-		s += "Евклидова норма невязки на основной сетке: " + Convert::ToString(res[5]) + "\n\n";
-		//s += "Норма бесконечности невязки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
-		s += "начальная евклидова норма невязки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
-		
-		MessageBox::Show(s, "Результаты решения основной задачи", MessageBoxButtons::OK);
 
+		MainResData();
 	}
 
 
-	/*private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
-		//Тестовая
-		String ^methodname, ^interpolname = "использовано нулевое приближение";
-
-		switch (comboBox1->SelectedIndex)
-		{
-	
-		case 0:
-			methodname = "метод сопряжённых градиентов";
-			break;
-		case 1:
-			methodname = "метод простой итерации";
-			break;
-		
-		}
-
-		if (radioButton2->Checked)
-			interpolname = "использована интерполяция по x";
-		if (radioButton3->Checked)
-			interpolname = "использована интерполяция по y";
-		if (radioButton4->Checked)
-			interpolname = "использовано усреднение интерполяций по x и по y";
-
-		ifstream file("ResTest.txt");
-		TVector<double> res(10);
-		for (int i = 0; i < 10; i++)
-			file >> res[i];
-		file.close();
-
-		String ^s;
-		s = "Для решения тестовой задачи использована сетка с числом\n\n";
-		s += "Разбиений по x: n = " + textBox1->Text + " и числом разбиений по y: m = " + textBox2->Text + "\n\n";
-		s += "Применялся " + methodname + "\n\n";
-		s += "Точность метода: eps = " + textBox3->Text + "\n\n";
-		//s+="Параметр метода: ";
-		s += "На решение затрачено N = " + Convert::ToString(res[1]) + "\n\n";
-		s += "Достигнутая точность метода: " + Convert::ToString(res[0]) + "\n\n";
-		s += "Тестовая задача решена с точностью: " + Convert::ToString(res[2]) + "\n\n";
-		s += "В качестве начального приближения " + interpolname + "\n\n";
-		s += "Евклидова норма невязки на вспомогательной сетке: " + Convert::ToString(res[3]) + "\n\n";
-		//s += "Норма бесконечности невязки на вспомогательной сетке: " + Convert::ToString(res[10]) + "\n\n";
-		s += "начальная евклидова норма невязки на вспомогательной сетке: " + Convert::ToString(res[10]) + "\n\n";
-
-
-		MessageBox::Show(s, "Результаты решения тестовой задачи", MessageBoxButtons::OK);
-		
-	}*/
-
-
-	/*private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
-
-		//Основная
-		String ^methodname, ^interpolname = "использовано нулевое приближение";
-
-		switch (comboBox1->SelectedIndex)
-		{
-		
-		case 0:
-			methodname = "метод сопряжённых градиентов";
-			break;
-		case 1:
-			methodname = "метод простой итерации";
-			break;
-	
-		}
-
-		if (radioButton2->Checked)
-			interpolname = "использована интерполяция по x";
-		if (radioButton3->Checked)
-			interpolname = "использована интерполяция по y";
-		if (radioButton4->Checked)
-			interpolname = "использовано усреднение интерполяций по x и по y";
-
-		ifstream file("ResMain.txt");
-		TVector<double> res(9);
-		for (int i = 0; i < 9; i++)
-			file >> res[i];
-		file.close();
-
-		String ^s;
-		s = "Для основной задачи использована сетка с числом\n\n";
-		s += "Разбиений по x: n = " + textBox1->Text + " и числом разбиений по y: m = " + textBox2->Text + "\n\n";
-		s += "Применялся " + methodname + "\n\n";
-		s += "Точность метода: eps = " + textBox3->Text + "\n\n";
-		//s+="Параметр метода: ";
-		s += "На решение затрачено N = " + Convert::ToString(res[1]) + "\n\n";
-		s += "Достигнутая точность метода: " + Convert::ToString(res[0]) + "\n\n";
-		s += "При пересчёте задачи с половинным шагом затрачено N = " + Convert::ToString(res[3]) + " итераций \n\n";
-		s += "и достигнута точность итерационного метода: " + Convert::ToString(res[2]) + "\n\n";
-		s += "Максимальная разность двух приближений составила: " + Convert::ToString(res[4]) + "\n\n";
-		s += "И соответствует узлу x = " + Convert::ToString(res[7]) + " y = " + Convert::ToString(res[8]) + "\n\n";
-		s += "В качестве начального приближения " + interpolname + "\n\n";
-		s += "Евклидова норма невязки на основной сетке: " + Convert::ToString(res[5]) + "\n\n";
-		//s += "Норма бесконечности невязки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
-		s += "начальная евклидова норма невязки на основной сетке: " + Convert::ToString(res[9]) + "\n\n";
-
-		MessageBox::Show(s, "Результаты решения основной задачи", MessageBoxButtons::OK);
-	}*/
 
 
 	private: void OutToDataGrid1(string s)
@@ -1148,14 +1032,6 @@ private: System::Windows::Forms::Panel^ panel1;
 
 		Inicial >> n >> m;
 
-		//Команды для gnuplot
-		ofstream com("commands.txt");
-		com << "set terminal wxt persist\n";
-		com << "set dgrid3d " << n + 1 << " " << m + 1 << endl;
-		com << "splot 'C:\\Users\\HOME\\source\\repos\\Interface\\Interface\\Graph.txt' with pm3d \n";
-		com << "pause -1\n";
-		com.close();
-
 		for (int i = 0; i < xBorder.Size(); i++)
 			Inicial >> xBorder[i];
 		Inicial >> h;
@@ -1188,7 +1064,161 @@ private: System::Windows::Forms::Panel^ panel1;
 
 	}
 	
+
+
+private: void TestResData()
+{
+	//Тестовая задача
+	String^ methodname, ^ interpolname = "использовано нулевое приближение";
+
+	switch (comboBox1->SelectedIndex)
+	{
+
+	case 0:
+		methodname = "метод сопряжённых градиентов";
+		break;
+	case 1:
+		methodname = "метод простой итерации";
+		break;
+
+	}
+
+	if (radioButton2->Checked)
+		interpolname = "использована интерполяция по x";
+	if (radioButton3->Checked)
+		interpolname = "использована интерполяция по y";
+	if (radioButton4->Checked)
+		interpolname = "использовано усреднение интерполяций по x и по y";
+
+	ifstream file("ResTest.txt");
+	TVector<double> res(9);
+	for (int i = 0; i < 9; i++)
+		file >> res[i];
+	file.close();
+
+	String^ s;
+	s = "Для решения тестовой задачи использована сетка с числом\n\n";
+	s += "Разбиений по x: n = " + textBox1->Text + " и числом разбиений по y: m = " + textBox2->Text + "\n\n";
+	s += "Применялся " + methodname + "\n\n";
+	s += "Точность метода: eps = " + textBox3->Text + "\n\n";
+	//s+="Параметр метода: ";
+	s += "На решение затрачено N = " + Convert::ToString(res[1]) + "\n\n";
+	s += "Достигнутая точность метода: " + Convert::ToString(res[0]) + "\n\n";
+	s += "Тестовая задача решена с точностью: " + Convert::ToString(res[2]) + "\n\n";
+	s += "И соответствует узлу x = " + Convert::ToString(res[3]) + " y = " + Convert::ToString(res[4]) + "\n\n";
+	s += "В качестве начального приближения " + interpolname + "\n\n";
+	s += "Начальная невязка в Евклидовой норме = " + Convert::ToString(res[5]) + "\n\n";
+	s += "Начальная невязка в норме бесконечность = " + Convert::ToString(res[6]) + "\n\n";
+	s += "Конечная невязка в Евклидовой норме = " + Convert::ToString(res[7]) + "\n\n";
+	s += "Конечная невязка в норме бесконечность = " + Convert::ToString(res[8]) + "\n\n";
+
+	MessageBox::Show(s, "Результаты решения тестовой задачи", MessageBoxButtons::OK);
+}
+
+
+	private: void MainResData()
+	{
+		//Основная задача
+		String^ methodname, ^ interpolname = "использовано нулевое приближение";
+
+		switch (comboBox1->SelectedIndex)
+		{
 	
+		case 0:
+			methodname = "метод сопряжённых градиентов";
+			break;
+		case 1:
+			methodname = "метод простой итерации";
+			break;
+		
+		}
+
+		if (radioButton2->Checked)
+			interpolname = "использована интерполяция по x";
+		if (radioButton3->Checked)
+			interpolname = "использована интерполяция по y";
+		if (radioButton4->Checked)
+			interpolname = "использовано усреднение интерполяций по x и по y";
+
+		ifstream file("ResMain.txt");
+		TVector<double> res(15);
+		for (int i = 0; i < 15; i++)
+			file >> res[i];
+		file.close();
+
+		String^ s;
+		s = "Для основной задачи использована сетка с числом\n\n";
+		s += "Разбиений по x: n = " + textBox1->Text + " и числом разбиений по y: m = " + textBox2->Text + "\n\n";
+		s += "Применялся " + methodname + "\n\n";
+		s += "Точность метода: eps = " + textBox3->Text + "\n\n";
+		//s+="Параметр метода: ";
+		s += "На решение затрачено N = " + Convert::ToString(res[1]) + "\n\n";
+		s += "Достигнутая точность метода: " + Convert::ToString(res[0]) + "\n\n";
+		s += "При пересчёте задачи с половинным шагом затрачено N = " + Convert::ToString(res[3]) + " итераций \n\n";
+		s += "и достигнута точность итерационного метода: " + Convert::ToString(res[2]) + "\n\n";
+		s += "Максимальная разность двух приближений составила: " + Convert::ToString(res[4]) + "\n\n";
+		s += "И соответствует узлу x = " + Convert::ToString(res[5]) + " y = " + Convert::ToString(res[6]) + "\n\n";
+		s += "В качестве начального приближения " + interpolname + "\n\n";
+		s += "Начальная невязка в Евклидовой норме на осн. сетке= " + Convert::ToString(res[7]) + "\n\n";
+		s += "Начальная невязка в норме бесконечность на осн. сетке = " + Convert::ToString(res[8]) + "\n\n";
+		s += "Конечная невязка в Евклидовой норме на осн. сетке = " + Convert::ToString(res[9]) + "\n\n";
+		s += "Конечная невязка в норме бесконечность на осн. сетке = " + Convert::ToString(res[10]) + "\n\n";
+		s += "Начальная невязка в Евклидовой норме на всп. сетке= " + Convert::ToString(res[11]) + "\n\n";
+		s += "Начальная невязка в норме бесконечность на всп. сетке = " + Convert::ToString(res[12]) + "\n\n";
+		s += "Конечная невязка в Евклидовой норме на всп. сетке = " + Convert::ToString(res[13]) + "\n\n";
+		s += "Конечная невязка в норме бесконечность на всп. сетке = " + Convert::ToString(res[14]) + "\n\n";
+
+		MessageBox::Show(s, "Результаты решения основной задачи", MessageBoxButtons::OK);
+	}
+
+
+
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		//Дополнительная справка для тестовой задачи
+		ifstream file("ResTest.txt");
+		TVector<double> res(9);
+		for (int i = 0; i < 9; i++)
+			file >> res[i];
+		file.close();
+
+		String^ s;
+		s = "Начальная невязка в Евклидовой норме = " + Convert::ToString(res[5]) + "\n\n";
+		s += "Начальная невязка в норме бесконечность = " + Convert::ToString(res[6]) + "\n\n";
+		s += "Конечная невязка в Евклидовой норме = " + Convert::ToString(res[7]) + "\n\n";
+		s += "Конечная невязка в норме бесконечность = " + Convert::ToString(res[8]) + "\n\n";
+
+		MessageBox::Show(s, "Сведения о невязках", MessageBoxButtons::OK);
+
+	}
+
+
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		//Дополнительная справка для основной задачи
+		ifstream file("ResMain.txt");;
+		TVector<double> res(15);
+		for (int i = 0; i < 15; i++)
+			file >> res[i];
+		file.close();
+
+		String^ s;
+		s = "Начальная невязка в Евклидовой норме на осн. сетке= " + Convert::ToString(res[7]) + "\n\n";
+		s += "Начальная невязка в норме бесконечность на осн. сетке = " + Convert::ToString(res[8]) + "\n\n";
+		s += "Конечная невязка в Евклидовой норме на осн. сетке = " + Convert::ToString(res[9]) + "\n\n";
+		s += "Конечная невязка в норме бесконечность на осн. сетке = " + Convert::ToString(res[10]) + "\n\n";
+		s += "Начальная невязка в Евклидовой норме на всп. сетке= " + Convert::ToString(res[11]) + "\n\n";
+		s += "Начальная невязка в норме бесконечность на всп. сетке = " + Convert::ToString(res[12]) + "\n\n";
+		s += "Конечная невязка в Евклидовой норме на всп. сетке = " + Convert::ToString(res[13]) + "\n\n";
+		s += "Конечная невязка в норме бесконечность на всп. сетке = " + Convert::ToString(res[14]) + "\n\n";
+
+		MessageBox::Show(s, "Сведения о невязках", MessageBoxButtons::OK);
+
+	}
+
+
+
+
 private: System::Void radioButton3_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {

@@ -17,7 +17,7 @@ public:
 
 	virtual void Optimal(bool wish); //–азрешить или рапретить использоване оптимального параметра
 
-	virtual TVector<double> MethodError(double eps, int MaxIterations); //ѕогрешность решени€, дл€ тестовых задач
+	virtual void MethodError(double eps, int MaxIterations); //ѕогрешность решени€, дл€ тестовых задач
 };
 
 #endif

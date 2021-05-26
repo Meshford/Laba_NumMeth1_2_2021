@@ -16,6 +16,7 @@ class AllMethods
 protected:
 	TMatrix<double> V, R, F; //Решение задачи, невязка и значение функции в правой части соответственно
 	TVector<double> xBorder, yBorder; //Границы по оси x и y соответственно
+	TVector<double> resultTest, resultMain; //Хранит данные о погрешностях и невязках
 	double h, k; //Шаг по оси x и y соответственно
 	double hE, kE, A; //Вспомогательные данные
 	int TaskNumber, n, m; //Номер задачи, размерность сетки
@@ -34,12 +35,15 @@ public:
 
 	virtual void SetParametrs(); //Параметр метода
 
+	virtual double Runner(int index) { return 0; } //
 	virtual double Runner(); //Итерационный метод
 
-	void GetRes(double **mas); //Записать решение в динамический массив
+	TMatrix<double> GetV() { return V; }
 
-	virtual TVector<double> MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name); //Точность решения, для основных задач
-	virtual TVector<double> MethodError(double eps, int MaxIterations); //Погрешность решения, для тестовых задач
+	void GetRes(double** mas); //Записать решение в динамический массив
+
+	virtual void MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name); //Точность решения, для основных задач
+	virtual void MethodError(double eps, int MaxIterations); //Погрешность решения, для тестовых задач
 
 	void VectorNevyazki();
 	double NevyazkaInf(); //Невязка по норме бесконечность
@@ -60,7 +64,16 @@ public:
 	virtual void SetUserParametr(double Parametr) { }
 	virtual double GetParametr() { return 0; }
 	virtual void Optimal(bool wish) {}
+	virtual TVector<double> GetTestResults() { return resultTest; }
+	virtual TVector<double> GetMainResults() { return resultMain; }
 
+	void TestPartOne(TMatrix<double>& U);
+	void TestPartTwo(TMatrix<double>& U);
+
+	void MainPartOne(AllMethods* Solution, char Name);
+	void MainPartTwo(AllMethods* Solution, TMatrix<double>& V2);
+
+	virtual double GetBet() { return 0; }
 };
 
 #endif

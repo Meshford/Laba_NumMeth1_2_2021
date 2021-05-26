@@ -12,33 +12,33 @@ template <class ValType>
 class TVector
 {
 protected:
-	ValType *pVector;
+	ValType* pVector;
 	int size;
 public:
 	TVector(int s = 10);
-	TVector(const TVector &v);
+	TVector(const TVector& v);
 	~TVector();
 	int Size() { return size; }
 	ValType& operator[](int ind);
-	bool operator==(const TVector &v) const;
-	bool operator!=(const TVector &v) const;
-	TVector& operator=(const TVector &v);
-	TVector& operator=(const ValType &num);
+	bool operator==(const TVector& v) const;
+	bool operator!=(const TVector& v) const;
+	TVector& operator=(const TVector& v);
+	TVector& operator=(const ValType& num);
 
 
-	TVector  operator+(const ValType &num);
-	TVector  operator-(const ValType &num);
-	TVector  operator*(const ValType &num);
-	TVector  operator/(const ValType &num);
+	TVector  operator+(const ValType& num);
+	TVector  operator-(const ValType& num);
+	TVector  operator*(const ValType& num);
+	TVector  operator/(const ValType& num);
 
 
-	TVector  operator+(const TVector &v);
-	TVector  operator-(const TVector &v);
-	ValType  operator*(const TVector &v);
+	TVector  operator+(const TVector& v);
+	TVector  operator-(const TVector& v);
+	ValType  operator*(const TVector& v);
 
-	TVector Absolute(const TVector &v);
+	TVector Absolute(const TVector& v);
 
-	friend istream& operator >> (istream &is, TVector &v)
+	friend istream& operator >> (istream& is, TVector& v)
 	{
 		for (int i = 0; i < v.size; i++)
 		{
@@ -46,7 +46,7 @@ public:
 		}
 		return is;
 	}
-	friend ostream& operator<<(ostream &os, const TVector &v)
+	friend ostream& operator<<(ostream& os, const TVector& v)
 	{
 		for (int i = 0; i < v.size; i++)
 		{
@@ -66,7 +66,7 @@ TVector<ValType>::TVector(int s)
 }
 
 template <class ValType>
-TVector<ValType>::TVector(const TVector<ValType> &v)
+TVector<ValType>::TVector(const TVector<ValType>& v)
 {
 	size = v.size;
 	pVector = new ValType[size];
@@ -87,7 +87,7 @@ ValType& TVector<ValType>::operator[](int ind)
 }
 
 template <class ValType>
-bool TVector<ValType>::operator==(const TVector<ValType> &v) const
+bool TVector<ValType>::operator==(const TVector<ValType>& v) const
 {
 	if (size != v.size)
 		return false;
@@ -98,7 +98,7 @@ bool TVector<ValType>::operator==(const TVector<ValType> &v) const
 }
 
 template <class ValType>
-bool TVector<ValType>::operator!=(const TVector<ValType> &v) const
+bool TVector<ValType>::operator!=(const TVector<ValType>& v) const
 {
 	if (size != v.size)
 		return true;
@@ -109,7 +109,7 @@ bool TVector<ValType>::operator!=(const TVector<ValType> &v) const
 }
 
 template <class ValType>
-TVector<ValType>& TVector<ValType>::operator=(const TVector<ValType> &v)
+TVector<ValType>& TVector<ValType>::operator=(const TVector<ValType>& v)
 {
 	if (this != &v)
 	{
@@ -128,7 +128,7 @@ TVector<ValType>& TVector<ValType>::operator=(const TVector<ValType> &v)
 }
 
 template <class ValType>
-TVector<ValType>& TVector<ValType>::operator=(const ValType &num)
+TVector<ValType>& TVector<ValType>::operator=(const ValType& num)
 {
 	for (int i = 0; i < size; i++)
 		pVector[i] = num;
@@ -136,7 +136,7 @@ TVector<ValType>& TVector<ValType>::operator=(const ValType &num)
 }
 
 template <class ValType>
-TVector<ValType>  TVector<ValType>::operator+(const ValType &num)
+TVector<ValType>  TVector<ValType>::operator+(const ValType& num)
 {
 	TVector res(size);
 	for (int i = 0; i < size; i++)
@@ -148,7 +148,7 @@ TVector<ValType>  TVector<ValType>::operator+(const ValType &num)
 }
 
 template <class ValType>
-TVector<ValType>  TVector<ValType>::operator-(const ValType &num)
+TVector<ValType>  TVector<ValType>::operator-(const ValType& num)
 {
 	TVector res(size);
 	for (int i = 0; i < size; i++)
@@ -159,7 +159,7 @@ TVector<ValType>  TVector<ValType>::operator-(const ValType &num)
 }
 
 template <class ValType>
-TVector<ValType>  TVector<ValType>::operator*(const ValType &num)
+TVector<ValType>  TVector<ValType>::operator*(const ValType& num)
 {
 	TVector res(size);
 	for (int i = 0; i < size; i++)
@@ -170,7 +170,7 @@ TVector<ValType>  TVector<ValType>::operator*(const ValType &num)
 }
 
 template <class ValType>
-TVector<ValType>  TVector<ValType>::operator/(const ValType &num)
+TVector<ValType>  TVector<ValType>::operator/(const ValType& num)
 {
 	TVector res(size);
 	if (num != 0)
@@ -191,7 +191,7 @@ TVector<ValType>  TVector<ValType>::operator/(const ValType &num)
 }
 
 template <class ValType>
-TVector<ValType> TVector<ValType>::Absolute(const TVector &v)
+TVector<ValType> TVector<ValType>::Absolute(const TVector& v)
 {
 	TVector res(v.size);
 	for (int i = 0; i < v.size; i++)
@@ -202,7 +202,7 @@ TVector<ValType> TVector<ValType>::Absolute(const TVector &v)
 }
 
 template <class ValType>
-TVector<ValType>  TVector<ValType>::operator+(const TVector<ValType> &v)
+TVector<ValType>  TVector<ValType>::operator+(const TVector<ValType>& v)
 {
 	TVector res(size);
 	for (int i = 0; i < size; i++)
@@ -213,7 +213,7 @@ TVector<ValType>  TVector<ValType>::operator+(const TVector<ValType> &v)
 }
 
 template <class ValType>
-TVector<ValType>  TVector<ValType>::operator-(const TVector<ValType> &v)
+TVector<ValType>  TVector<ValType>::operator-(const TVector<ValType>& v)
 {
 	TVector res(size);
 	for (int i = 0; i < size; i++)
@@ -224,7 +224,7 @@ TVector<ValType>  TVector<ValType>::operator-(const TVector<ValType> &v)
 }
 
 template <class ValType>
-ValType  TVector<ValType>::operator*(const TVector<ValType> &v)
+ValType  TVector<ValType>::operator*(const TVector<ValType>& v)
 {
 	ValType res = 0;
 	for (int i = 0; i < size; i++)
@@ -241,24 +241,24 @@ class TMatrix : public TVector< TVector<ValType> >
 {
 public:
 	TMatrix(int s = 10);
-	TMatrix(const TMatrix &mt);
-	TMatrix(const TVector<TVector<ValType> > &mt);
-	bool operator==(const TMatrix &mt) const;
-	bool operator!=(const TMatrix &mt) const;
-	TMatrix& operator= (const TMatrix &mt);
-	TMatrix  operator+ (const TMatrix &mt);
-	TMatrix  operator- (const TMatrix &mt);
-	TMatrix  operator* (const TMatrix &mt);
-	TMatrix operator* (const ValType &num);
-	TMatrix operator+ (const ValType &num);
-	TMatrix operator- (const ValType &num);
-	TMatrix operator/ (const ValType &num);
-	TVector<ValType>  operator* (const TVector<ValType> &v);
+	TMatrix(const TMatrix& mt);
+	TMatrix(const TVector<TVector<ValType> >& mt);
+	bool operator==(const TMatrix& mt) const;
+	bool operator!=(const TMatrix& mt) const;
+	TMatrix& operator= (const TMatrix& mt);
+	TMatrix  operator+ (const TMatrix& mt);
+	TMatrix  operator- (const TMatrix& mt);
+	TMatrix  operator* (const TMatrix& mt);
+	TMatrix operator* (const ValType& num);
+	TMatrix operator+ (const ValType& num);
+	TMatrix operator- (const ValType& num);
+	TMatrix operator/ (const ValType& num);
+	TVector<ValType>  operator* (const TVector<ValType>& v);
 
 	void SingleMatrix();
 	TMatrix ReverseMatrix();
 
-	friend istream& operator >> (istream &is, TMatrix &mt)
+	friend istream& operator >> (istream& is, TMatrix& mt)
 	{
 		for (int i = 0; i < mt.size; i++)
 		{
@@ -266,7 +266,7 @@ public:
 		}
 		return is;
 	}
-	friend ostream & operator<<(ostream &os, const TMatrix &mt)
+	friend ostream& operator<<(ostream& os, const TMatrix& mt)
 	{
 		for (int i = 0; i < mt.size; i++)
 		{
@@ -286,25 +286,25 @@ TMatrix<ValType>::TMatrix(int s) : TVector< TVector<ValType> >(s)
 }
 
 template <class ValType>
-TMatrix<ValType>::TMatrix(const TMatrix<ValType> &mt) :TVector<TVector<ValType> >(mt)
+TMatrix<ValType>::TMatrix(const TMatrix<ValType>& mt) :TVector<TVector<ValType> >(mt)
 {
 
 }
 
 template <class ValType>
-TMatrix<ValType>::TMatrix(const TVector<TVector<ValType> > &mt) :TVector<TVector<ValType> >(mt)
+TMatrix<ValType>::TMatrix(const TVector<TVector<ValType> >& mt) :TVector<TVector<ValType> >(mt)
 {
 
 }
 
 template <class ValType>
-bool TMatrix<ValType>::operator==(const TMatrix<ValType> &mt) const
+bool TMatrix<ValType>::operator==(const TMatrix<ValType>& mt) const
 {
 	return TVector<TVector<ValType> >::operator==(mt);
 }
 
 template <class ValType>
-bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const
+bool TMatrix<ValType>::operator!=(const TMatrix<ValType>& mt) const
 {
 	return TVector<TVector<ValType> >::operator!=(mt);
 }
@@ -312,7 +312,7 @@ bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const
 //----------------------//
 
 template <class ValType>
-TMatrix<ValType> TMatrix<ValType>::operator* (const ValType &num)
+TMatrix<ValType> TMatrix<ValType>::operator* (const ValType& num)
 {
 	TMatrix res(TMatrix::size);
 	for (int i = 0; i < TMatrix::size; i++)
@@ -321,19 +321,19 @@ TMatrix<ValType> TMatrix<ValType>::operator* (const ValType &num)
 }
 
 template <class ValType>
-TMatrix<ValType> TMatrix<ValType>::operator+ (const ValType &num)
+TMatrix<ValType> TMatrix<ValType>::operator+ (const ValType& num)
 {
 	return TVector<TVector<ValType> >::operator+(num);
 }
 
 template <class ValType>
-TMatrix<ValType> TMatrix<ValType>::operator- (const ValType &num)
+TMatrix<ValType> TMatrix<ValType>::operator- (const ValType& num)
 {
 	return TVector<TVector<ValType> >::operator-(num);
 }
 
 template <class ValType>
-TMatrix<ValType> TMatrix<ValType>::operator/ (const ValType &num)
+TMatrix<ValType> TMatrix<ValType>::operator/ (const ValType& num)
 {
 	TMatrix res(TMatrix::size);
 	for (int i = 0; i < TMatrix::size; i++)
@@ -344,7 +344,7 @@ TMatrix<ValType> TMatrix<ValType>::operator/ (const ValType &num)
 //-----------------//
 
 template <class ValType>
-TMatrix<ValType>& TMatrix<ValType>::operator= (const TMatrix<ValType> &mt)
+TMatrix<ValType>& TMatrix<ValType>::operator= (const TMatrix<ValType>& mt)
 {
 	if (this != &mt)
 	{
@@ -363,19 +363,19 @@ TMatrix<ValType>& TMatrix<ValType>::operator= (const TMatrix<ValType> &mt)
 }
 
 template <class ValType>
-TMatrix<ValType>  TMatrix<ValType>::operator+ (const TMatrix<ValType> &mt)
+TMatrix<ValType>  TMatrix<ValType>::operator+ (const TMatrix<ValType>& mt)
 {
 	return TVector<TVector<ValType> >::operator+(mt);
 }
 
 template <class ValType>
-TMatrix<ValType>  TMatrix<ValType>::operator- (const TMatrix<ValType> &mt)
+TMatrix<ValType>  TMatrix<ValType>::operator- (const TMatrix<ValType>& mt)
 {
 	return TVector<TVector<ValType> >::operator-(mt);
 }
 
 template <class ValType>
-TMatrix<ValType>  TMatrix<ValType>::operator* (const TMatrix<ValType> &mt)
+TMatrix<ValType>  TMatrix<ValType>::operator* (const TMatrix<ValType>& mt)
 {
 	int count = 0;
 	TMatrix res(TMatrix::size);
@@ -395,7 +395,7 @@ TMatrix<ValType>  TMatrix<ValType>::operator* (const TMatrix<ValType> &mt)
 //------------------//
 
 template <class ValType>
-TVector<ValType>  TMatrix<ValType>::operator* (const TVector<ValType> &v)
+TVector<ValType>  TMatrix<ValType>::operator* (const TVector<ValType>& v)
 {
 	TVector<ValType> res(TMatrix::size);
 	for (int i = 0; i < TMatrix::size; i++)

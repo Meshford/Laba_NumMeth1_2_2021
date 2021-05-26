@@ -26,7 +26,7 @@ public:
 	virtual void SetParametrs(); //Параметр метода
 	virtual double Runner(); //Итерационный метод
 
-	virtual TVector<double> MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name);
+	virtual void MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name);
 
 };
 

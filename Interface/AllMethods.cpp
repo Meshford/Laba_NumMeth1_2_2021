@@ -13,10 +13,13 @@ AllMethods::AllMethods(int N, int M, TVector<double> XBorder, TVector<double> YB
 	TaskNumber = TASKNumber;
 	n = N; m = M;
 
+	resultTest = TVector<double>(9);
+	resultMain = TVector<double>(15);
+
 	xBorder = XBorder; yBorder = YBorder;
 
-	h = (xBorder[xBorder.Size() - 1] - xBorder[0]) / (1.0*n);
-	k = (yBorder[yBorder.Size() - 1] - yBorder[0]) / (1.0*m);
+	h = (xBorder[xBorder.Size() - 1] - xBorder[0]) / (1.0 * n);
+	k = (yBorder[yBorder.Size() - 1] - yBorder[0]) / (1.0 * m);
 	hE = -1 / pow(h, 2);
 	kE = -1 / pow(k, 2);
 	A = -2 * (hE + kE);
@@ -29,7 +32,6 @@ AllMethods::AllMethods(int N, int M, TVector<double> XBorder, TVector<double> YB
 	FunctionInicialisation();
 	Inicialisation();
 }
-
 
 double AllMethods::F_Function(double x, double y)
 {
@@ -167,7 +169,6 @@ double AllMethods::YInicialConditions(double y, int Num)
 	return res;
 }
 
-
 void AllMethods::Inicialisation()
 {
 	double x, y = yBorder[0];
@@ -199,7 +200,7 @@ double AllMethods::Runner()
 }
 
 
-void AllMethods::GetRes(double **mas)
+void AllMethods::GetRes(double** mas)
 {
 	for (int j = 0; j <= m; j++)
 		for (int i = 0; i <= n; i++)
@@ -207,15 +208,15 @@ void AllMethods::GetRes(double **mas)
 }
 
 
-TVector<double> AllMethods::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name) //Точность решения
+void AllMethods::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name) //Точность решения
 {
-	return 0;
+
 }
 
 
-TVector<double> AllMethods::MethodError(double eps, int MaxIterations) //Погрешность решения
+void AllMethods::MethodError(double eps, int MaxIterations) //Погрешность решения
 {
-	return 0;
+
 }
 
 
@@ -257,8 +258,8 @@ void AllMethods::ChangeGrid(int N, int M)
 {
 	n = N;
 	m = M;
-	h = (xBorder[xBorder.Size() - 1] - xBorder[0]) / (1.0*n);
-	k = (yBorder[yBorder.Size() - 1] - yBorder[0]) / (1.0*m);
+	h = (xBorder[xBorder.Size() - 1] - xBorder[0]) / (1.0 * n);
+	k = (yBorder[yBorder.Size() - 1] - yBorder[0]) / (1.0 * m);
 	hE = -1 / pow(h, 2);
 	kE = -1 / pow(k, 2);
 	A = -2 * (hE + kE);
@@ -276,8 +277,8 @@ void AllMethods::ChangeBorders(TVector<double> XBorder, TVector<double> YBorder)
 {
 	xBorder = XBorder;
 	yBorder = YBorder;
-	h = (xBorder[xBorder.Size() - 1] - xBorder[0]) / (1.0*n);
-	k = (yBorder[yBorder.Size() - 1] - yBorder[0]) / (1.0*m);
+	h = (xBorder[xBorder.Size() - 1] - xBorder[0]) / (1.0 * n);
+	k = (yBorder[yBorder.Size() - 1] - yBorder[0]) / (1.0 * m);
 	hE = -1 / pow(h, 2);
 	kE = -1 / pow(k, 2);
 	A = -2 * (hE + kE);
@@ -325,7 +326,7 @@ void AllMethods::XInterpolation()
 		x = xBorder[0] + h;
 		for (int i = 1; i < n; i++)
 		{
-			V[j][i] = ((x - a)*V[j][n] - (x - b)*V[j][0]) / (b - a);
+			V[j][i] = ((x - a) * V[j][n] - (x - b) * V[j][0]) / (b - a);
 			x += h;
 		}
 	}
@@ -341,7 +342,7 @@ void AllMethods::YInterpolation()
 		y = yBorder[0] + k;
 		for (int j = 1; j < m; j++)
 		{
-			V[j][i] = ((y - c)*V[m][i] - (y - d)*V[0][i]) / (d - c);
+			V[j][i] = ((y - c) * V[m][i] - (y - d) * V[0][i]) / (d - c);
 			y += k;
 		}
 	}
@@ -359,7 +360,7 @@ void AllMethods::Average()
 		y = yBorder[0] + k;
 		for (int j = 1; j < m; j++)
 		{
-			temp = ((y - c)*V[m][i] - (y - d)*V[0][i]) / (d - c);
+			temp = ((y - c) * V[m][i] - (y - d) * V[0][i]) / (d - c);
 			V[j][i] = (V[j][i] + temp) / 2;
 			y += k;
 		}
@@ -403,8 +404,125 @@ void AllMethods::SaveData(string s)
 	for (int j = 0; j <= m; j++)
 		for (int i = 0; i <= n; i++)
 			file << V[j][i] << endl;
-	
+
 	file.close();
-	
+
+}
+
+
+void AllMethods::TestPartOne(TMatrix<double>& U)
+{
+	double x, y = yBorder[0];
+	for (int j = 0; j <= m; j++)
+	{
+		U[j] = TVector<double>(n + 1);
+		x = xBorder[0];
+		for (int i = 0; i <= n; i++)
+		{
+			U[j][i] = ExactSolution(x, y);
+			x += h;
+		}
+		y += k;
+	}
+
+	//Начальные невязки
+	VectorNevyazki();
+	resultTest[5] = NevyazkaEvkl();
+	resultTest[6] = NevyazkaInf();
+}
+
+
+void AllMethods::TestPartTwo(TMatrix<double>& U)
+{
+	double sup; //Переменная-помощник
+	double error = 0; //Погрешность
+
+	SaveData("MainSolutE.txt"); //Заполнили файл численным решением
+	SaveGrid("SupSolutE.txt");  //Заполнили файл начальной информацией
+	SaveGrid("DifferenceE.txt"); //Заполняем файл начальной информацией
+
+	ofstream SupSolut("SupSolutE.txt", ios::app), Difference("DifferenceE.txt", ios::app);//Запись в файл будет продолжена с последнего элемента
+
+	int ix = 0, jy = 0;
+	for (int j = 0; j <= m; j++)
+		for (int i = 0; i <= n; i++)
+		{
+			sup = fabs(V[j][i] - U[j][i]);
+			SupSolut << U[j][i] << endl;
+			Difference << sup << endl;
+			if (sup > error)
+			{
+				error = sup;
+				ix = i;
+				jy = j;
+			}
+		}
+
+	VectorNevyazki();
+	resultTest[2] = error; //Погрешность решения
+	resultTest[3] = xBorder[0] + h * ix; //Значение x в самой плохой точке
+	resultTest[4] = yBorder[0] + k * jy; //Значение y в самой плохой точке
+	resultTest[7] = NevyazkaEvkl();
+	resultTest[8] = NevyazkaInf();
+}
+
+
+void AllMethods::MainPartOne(AllMethods* Solution, char Name)
+{
+	switch (Name)
+	{
+	case 'A':
+		Solution->Average();
+		break;
+	case 'X':
+		Solution->XInterpolation();
+		break;
+	case 'Y':
+		Solution->YInterpolation();
+		break;
+	}
+
+	VectorNevyazki();
+	Solution->VectorNevyazki();
+	resultMain[7] = NevyazkaEvkl();
+	resultMain[8] = NevyazkaInf();
+	resultMain[11] = Solution->NevyazkaEvkl();
+	resultMain[12] = Solution->NevyazkaInf();
+}
+
+
+void AllMethods::MainPartTwo(AllMethods* Solution, TMatrix<double>& V2)
+{
+	SaveData("MainSolutA.txt"); //Заполнили файл численным решением
+	Solution->SaveData("SupSolutA.txt");  //Заполнили файл с численным решением на вспомогательной сетке
+	SaveGrid("DifferenceA.txt"); //Заполняем файл начальной информацией
+
+	ofstream Difference("DifferenceA.txt", ios::app); //Запись в файл будет продолжена с последнего элемента
+
+	double error = 0; //Точность решения
+	double sup; //Вспомогательная переменная
+	int ix = 0, jy = 0;
+	for (int j = 0; j <= m; j++)
+		for (int i = 0; i <= n; i++)
+		{
+			sup = fabs(V[j][i] - V2[2 * j][2 * i]);
+			if (sup > error)
+			{
+				error = sup;
+				ix = i;
+				jy = j;
+			}
+		}
+
+	VectorNevyazki();
+	Solution->VectorNevyazki();
+
+	resultMain[4] = error; //Точность решения
+	resultMain[5] = xBorder[0] + ix * h; //Значение x в самой плохой точке
+	resultMain[6] = yBorder[0] + jy * k; //Значение y в самой плохой точке
+	resultMain[9] = NevyazkaEvkl();
+	resultMain[10] = NevyazkaInf();
+	resultMain[13] = Solution->NevyazkaEvkl();
+	resultMain[14] = Solution->NevyazkaInf();
 }
 

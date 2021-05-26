@@ -26,7 +26,7 @@ void MSG::SetParametrs()
 			Ahh += res * H[j][i];
 		}
 	a = -temp / Ahh;
-	
+
 }
 
 
@@ -58,26 +58,12 @@ double MSG::Runner()
 }
 
 
-TVector<double> MSG::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name)
+void MSG::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterations, char Name)
 {
-	MSG Solution(2 * n, 2 * m, xBorder, yBorder, TaskNumber);
-	switch (Name)
-	{
-	case 'A':
-		Solution.Average();
-		break;
-	case 'X':
-		Solution.XInterpolation();
-		break;
-	case 'Y':
-		Solution.YInterpolation();
-		break;
-	}
+	AllMethods* Solution;
+	Solution = new MSG(2 * n, 2 * m, xBorder, yBorder, TaskNumber);
 
-	double temp1;
-	VectorNevyazki();
-	Solution.VectorNevyazki();
-	temp1 = Solution.NevyazkaEvkl();
+	MainPartOne(Solution, Name);
 
 	double sup; //Вспомогательная переменная
 	TVector<double> accurancy(2); //Точность метода
@@ -99,77 +85,31 @@ TVector<double> MSG::MethodAccuracy(TVector<double> eps, TVector<int> MaxIterati
 
 	while ((accurancy[1] > eps[1]) && (IterationsCount[1] < MaxIterations[1]))
 	{
-		sup = Solution.Runner();
-		if (Solution.bet <= pow(10, -12))
+		sup = Solution->Runner();
+		if (Solution->GetBet() <= pow(10, -12))
 			break;
 		accurancy[1] = sup;
 		IterationsCount[1]++;
 	}
-	//
 
-	SaveData("MainSolutA.txt"); //Заполнили файл численным решением
-	Solution.SaveData("SupSolutA.txt");  //Заполнили файл с численным решением на вспомогательной сетке
-	SaveGrid("DifferenceA.txt"); //Заполняем файл начальной информацией
+	MainPartTwo(Solution, Solution->GetV());
 
-	ofstream Difference("DifferenceA.txt", ios::app); //Запись в файл будет продолжена с последнего элемента
+	resultMain[0] = accurancy[0]; //Точность метода на сетке (n+1,m+1)
+	resultMain[1] = IterationsCount[0]; //Количество итераций на сетке (n+1,m+1)
+	resultMain[2] = accurancy[1]; //Точность метода на сетке (2n+1,2m+1)
+	resultMain[3] = IterationsCount[1]; //Количество итераций на сетке (2n+1,2m+1)
 
-	double error = 0; //Точность решения
-	int ix, jy;
-	for (int j = 0; j <= m; j++)
-		for (int i = 0; i <= n; i++)
-		{
-			sup = fabs(V[j][i] - Solution.V[2 * j][2 * i]);
-			Difference << sup << endl;
-			if (sup > error)
-			{
-				error = sup;
-				ix = i;
-				jy = j;
-			}
-		}
-
-	double temp;
-	VectorNevyazki();
-	Solution.VectorNevyazki();
-
-	sup = NevyazkaEvkl();
-	temp = Solution.NevyazkaEvkl();
-	TVector<double> result(10);
-	result[0] = accurancy[0]; //Точность метода на сетке (n+1,m+1)
-	result[1] = IterationsCount[0]; //Количество итераций на сетке (n+1,m+1)
-	result[2] = accurancy[1]; //Точность метода на сетке (2n+1,2m+1)
-	result[3] = IterationsCount[1]; //Количество итераций на сетке (2n+1,2m+1)
-	result[4] = error; //Точность решения
-	result[5] = sup; //Евклидова норма невязки на основной сетке
-	result[6] = temp; //Евклидова норма невязки на вспомогательной сетке
-	result[7] = xBorder[0] + ix * h; //Значение x в самой плохой точке
-	result[8] = yBorder[0] + jy * k; //Значение y в самой плохой точке
-	result[9] = temp1; // начальная евклидова норма невязки на основной сетке
-	return result;
 }
 
 
-TVector<double> MSG::MethodError(double eps, int MaxIterations)
+void MSG::MethodError(double eps, int MaxIterations)
 {
-
-	VectorNevyazki();
-	double sup1 = NevyazkaEvkl();
 	//Считаем точное решение
 	TMatrix<double> u(m + 1);
-	double x, y = yBorder[0];
-	for (int j = 0; j <= m; j++)
-	{
-		u[j] = TVector<double>(n + 1);
-		x = xBorder[0];
-		for (int i = 0; i <= n; i++)
-		{
-			u[j][i] = ExactSolution(x, y);
-			x += h;
-		}
-		y += k;
-	}
 
-	double error = 0, accurancy = eps + 1; //Погрешность решения и точость метода соответственно
+	TestPartOne(u);
+
+	double accurancy = eps + 1; //Погрешность решения и точость метода соответственно
 	double sup; //Переменная помощник
 	int IterationsCount = 0; //Количество итераций
 
@@ -182,37 +122,9 @@ TVector<double> MSG::MethodError(double eps, int MaxIterations)
 		IterationsCount++;
 	}
 
-	SaveData("MainSolutE.txt"); //Заполнили файл численным решением
-	SaveGrid("SupSolutE.txt");  //Заполнили файл начальной информацией
-	SaveGrid("DifferenceE.txt"); //Заполняем файл начальной информацией
+	TestPartTwo(u);
 
-	ofstream SupSolut("SupSolutE.txt", ios::app), Difference("DifferenceE.txt", ios::app);//Запись в файл будет продолжена с последнего элемента
+	resultTest[0] = accurancy; //Точность метода
+	resultTest[1] = IterationsCount; //Количество итераций
 
-	int ix, jy;
-	for (int j = 0; j <= m; j++)
-		for (int i = 0; i <= n; i++)
-		{
-			sup = fabs(V[j][i] - u[j][i]);
-			SupSolut << u[j][i] << endl;
-			Difference << sup << endl;
-			if (sup > error)
-			{
-				error = sup;
-				ix = i;
-				jy = j;
-			}
-		}
-
-	VectorNevyazki();
-	sup = NevyazkaEvkl();
-	TVector<double> result(11);
-	result[0] = accurancy; //Точность метода
-	result[1] = IterationsCount; //Количество итераций
-	result[2] = error; //Погрешность решения
-	result[3] = sup; //Евклидова норма невязки
-	result[4] = xBorder[0] + h * ix; //Значение x в самой плохой точке
-	result[5] = yBorder[0] + k * jy; //Значение y в самой плохой точке
-	result[10] = sup1;//начальная евклидова норма невязки на вспомогательно сетке
-
-	return result;
 }
