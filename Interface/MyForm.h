@@ -669,7 +669,7 @@ private: System::Windows::Forms::Panel^ panel1;
 		file.close();
 
 		//Выводим данные в таблицу
-		OutToDataGrid1("MainSolutE.txt");
+		//OutToDataGrid1("MainSolutE.txt");
 
 		//Сохраняем параметр
 		file.open("Parametr.txt");
@@ -773,7 +773,7 @@ private: System::Windows::Forms::Panel^ panel1;
 		file.close();
 
 		//Выводим данные в таблицу
-		OutToDataGrid2("MainSolutA.txt");
+		//OutToDataGrid2("MainSolutA.txt");
 
 		//Сохраняем параметр
 		file.open("Parametr.txt");
